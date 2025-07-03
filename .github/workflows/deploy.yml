@@ -1,0 +1,35 @@
+name: Deploy DAB to Databricks
+ 
+on:
+  push:
+    branches:
+      - dev
+      - stage
+      - main
+ 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name }}
+ 
+    steps:
+      - uses: actions/checkout@v3
+ 
+      - name: Install Databricks CLI
+        run: pip install -U databricks-cli
+ 
+      - name: Configure Databricks CLI
+        run: |
+          mkdir -p ~/.databricks
+          echo "[default]" > ~/.databricks/config
+          echo "host = ${{ secrets.DATABRICKS_HOST }}" >> ~/.databricks/config
+          echo "token = ${{ secrets.DATABRICKS_TOKEN }}" >> ~/.databricks/config
+ 
+      - name: Set Environment Variable
+        run: echo "TARGET_ENV=${{ github.ref_name }}" >> $GITHUB_ENV
+ 
+      - name: Deploy Bundle
+        run: databricks bundle deploy --target $TARGET_ENV
+ 
+      - name: Run Job
+        run: databricks bundle run run-hello --target $TARGET_ENV
