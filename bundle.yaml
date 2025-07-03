@@ -1,0 +1,16 @@
+bundle:
+  name: dab_demo
+
+targets:
+  dev:
+    workspace:
+      host: https://adb-5617320958565588.8.azuredatabricks.net/
+      root_path: /Workspace/dab_demo1
+    default: true
+    files:
+      include:
+        - DAB_POC/notebooks
+      exclude:
+        - "**/.git*"
+        - "**/*.yml"
+        - "**/*.yaml"
