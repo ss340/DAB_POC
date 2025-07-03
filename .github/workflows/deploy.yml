@@ -15,8 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
  
-      - name: Install Databricks CLI
-        run: pip install -U databricks-cli
+      - name: Install Databricks CLI via curl
+        run: |
+             curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh -o install-databricks.sh
+             bash install-databricks.sh
+             databricks version
  
       - name: Configure Databricks CLI
         run: |
