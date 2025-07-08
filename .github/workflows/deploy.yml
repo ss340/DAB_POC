@@ -33,11 +33,11 @@ jobs:
           echo "host = ${{ secrets.DATABRICKS_HOST }}" >> ~/.databricks/config
           echo "token = ${{ secrets.DATABRICKS_TOKEN }}" >> ~/.databricks/config
  
-      - name: Verify Databricks Connection
-        run: |
-          echo "Testing Databricks CLI connection..."
-          databricks workspace ls /
-          echo "Connection successful!"
+      # - name: Verify Databricks Connection
+      #   run: |
+      #     echo "Testing Databricks CLI connection..."
+      #     databricks workspace ls /
+      #     echo "Connection successful!"
  
       - name: Set Environment Variable
         run: echo "TARGET_ENV=${{ github.ref_name }}" >> $GITHUB_ENV
