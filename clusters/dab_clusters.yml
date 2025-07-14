@@ -1,0 +1,21 @@
+variables:
+      dab_cluster_task1:
+              description: "Dab cluster for task1"
+              type: complex
+              default:
+                 spark_version: 15.4.x-scala2.12
+                 node_type_id: Standard_D3_v2
+                 data_security_mode: SINGLE_USER
+                 autoscale:
+                    min_workers: 1
+                    max_workers: 4
+      dab_cluster_task2:
+              description: "Dab cluster for task2"
+              type: complex
+              default:
+                 spark_version: 15.4.x-scala2.12
+                 node_type_id: Standard_D3_v2
+                 data_security_mode: SINGLE_USER
+                 autoscale:
+                    min_workers: 1
+                    max_workers: 4

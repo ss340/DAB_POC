@@ -7,6 +7,11 @@ bundle:
 include:
   - resources/*.yml
   - resources/*/*.yml
+  - clusters/dab_clusters.yml
+variables:
+   dab_notebook:
+        description: this is my dab notebook
+        default: ../notebooks/hello.ipynb
 
 targets:
   dev:
@@ -18,7 +23,7 @@ targets:
     default: true
     workspace:
       host: https://adb-5617320958565588.8.azuredatabricks.net
-
+    
     presets:
       # Set dynamic_version: true on all artifacts of type "whl".
       # This makes "bundle deploy" add a timestamp to wheel's version before uploading,
@@ -32,6 +37,11 @@ targets:
       host: https://adb-5617320958565588.8.azuredatabricks.net
       # We explicitly deploy to /Workspace/Users/shivangi.s12@tcs.com to make sure we only have a single copy.
       root_path: /Workspace/Users/shivangi.s12@tcs.com/.bundle/${bundle.name}/${bundle.target}
+      #root_path: ${workspace.current_user.short_name}
+      #root_path: /${workspace.host}
     permissions:
       - user_name: shivangi.s12@tcs.com
         level: CAN_MANAGE
+
+    variables:
+      dab_notebook: ../notebooks/hello2.ipynb    
